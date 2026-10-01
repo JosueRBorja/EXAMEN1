@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+python-dotenv
+pydantic[email]
+psycopg[binary]
+pymysql
+boto3
+python-multipart
+httpx

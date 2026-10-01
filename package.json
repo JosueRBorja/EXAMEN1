@@ -1,0 +1,14 @@
+{
+  "name": "frame-plataforma-videos",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "local": "pm2 start ecosystem.config.cjs",
+    "estado": "pm2 status",
+    "logs": "pm2 logs",
+    "detener": "pm2 kill"
+  },
+  "devDependencies": {
+    "pm2": "^6.0.13"
+  }
+}

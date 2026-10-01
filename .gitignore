@@ -1,0 +1,27 @@
+
+
+# Python
+backend/.venv/
+**/__pycache__/
+*.py[cod]
+*.db
+.pytest_cache/
+
+# Archivos subidos durante las pruebas locales
+backend/uploads/
+
+# Node y compilacion del frontend
+node_modules/
+**/node_modules/
+frontend/dist/
+
+# PM2 y registros
+.pm2/
+*.log
+
+# Editores y sistema operativo
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
