@@ -12,6 +12,7 @@ from fastapi.testclient import TestClient
 
 from app.application import app
 from app.database import motor
+from app.storage import CARPETA_VIDEOS
 
 
 class FlujoLocalTest(unittest.TestCase):
@@ -39,6 +40,15 @@ class FlujoLocalTest(unittest.TestCase):
                 json={"email": "prueba@example.com", "password": "123456"},
             )
             self.assertEqual(login.status_code, 200)
+
+            subida_movil = cliente.post(
+                "/uploads/video",
+                files={"archivo": ("video-movil.mov", b"video de prueba", "video/quicktime")},
+            )
+            self.assertEqual(subida_movil.status_code, 200, subida_movil.text)
+            nombre_subido = subida_movil.json()["url"].rsplit("/", 1)[-1]
+            self.assertTrue(nombre_subido.endswith(".mov"))
+            (CARPETA_VIDEOS / nombre_subido).unlink(missing_ok=True)
 
             publicacion = cliente.post(
                 "/videos",

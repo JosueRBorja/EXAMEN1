@@ -60,7 +60,7 @@ export default function InicioNuevo({ alAbrirVideo, alNavegar }) {
         </button>
         <button onClick={() => alNavegar("subir")}>
           <span className="icono-verde"><UploadCloud size={22} /></span>
-          <div><strong>Publica algo nuevo</strong><small>Arrastra tu MP4 y miniatura</small></div>
+          <div><strong>Publica algo nuevo</strong><small>Arrastra tu video y miniatura</small></div>
           <ArrowRight size={19} />
         </button>
       </section>

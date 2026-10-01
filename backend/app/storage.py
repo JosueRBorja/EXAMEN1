@@ -14,6 +14,21 @@ CONTROLADOR_ALMACENAMIENTO = os.getenv("STORAGE_DRIVER", "local")
 URL_API = os.getenv("APP_URL", "http://127.0.0.1:8000")
 REGION_AWS = os.getenv("AWS_REGION", "us-east-1")
 
+TIPOS_CONTENIDO_VIDEO = {
+    ".mp4": "video/mp4",
+    ".mov": "video/quicktime",
+    ".m4v": "video/x-m4v",
+    ".webm": "video/webm",
+    ".avi": "video/x-msvideo",
+    ".mkv": "video/x-matroska",
+    ".3gp": "video/3gpp",
+    ".3g2": "video/3gpp2",
+    ".mpeg": "video/mpeg",
+    ".mpg": "video/mpeg",
+    ".ogv": "video/ogg",
+    ".wmv": "video/x-ms-wmv",
+}
+
 
 def preparar_carpetas():
     CARPETA_VIDEOS.mkdir(parents=True, exist_ok=True)
@@ -52,15 +67,17 @@ async def guardar_archivo(archivo: UploadFile, tipo: str) -> str:
     extension = Path(archivo.filename or "").suffix.lower()
 
     if tipo == "video":
-        extensiones = {".mp4"}
+        extensiones = set(TIPOS_CONTENIDO_VIDEO)
         tamano_maximo = 100 * 1024 * 1024
         carpeta = CARPETA_VIDEOS
         bucket = os.getenv("S3_VIDEOS_BUCKET")
+        tipo_contenido = TIPOS_CONTENIDO_VIDEO.get(extension, "video/mp4")
     else:
         extensiones = {".jpg", ".jpeg", ".png"}
         tamano_maximo = 5 * 1024 * 1024
         carpeta = CARPETA_MINIATURAS
         bucket = os.getenv("S3_THUMBNAILS_BUCKET")
+        tipo_contenido = archivo.content_type or "application/octet-stream"
 
     if extension not in extensiones:
         formatos = ", ".join(sorted(extensiones))
@@ -85,7 +102,7 @@ async def guardar_archivo(archivo: UploadFile, tipo: str) -> str:
             Bucket=bucket,
             Key=nombre_archivo,
             Body=contenido,
-            ContentType=archivo.content_type,
+            ContentType=tipo_contenido,
         )
         return f"https://{bucket}.s3.{REGION_AWS}.amazonaws.com/{nombre_archivo}"
 

@@ -4,7 +4,7 @@ import { useState } from "react";
 export default function ZonaArchivo({ tipo, archivo, alCambiar }) {
   const [arrastrando, setArrastrando] = useState(false);
   const esVideo = tipo === "video";
-  const aceptar = esVideo ? "video/mp4" : "image/jpeg,image/png";
+  const aceptar = esVideo ? "video/*,.mkv,.avi,.wmv" : "image/jpeg,image/png";
 
   function recibirArchivo(listaArchivos) {
     const nuevoArchivo = listaArchivos?.[0];
@@ -35,8 +35,8 @@ export default function ZonaArchivo({ tipo, archivo, alCambiar }) {
       ) : (
         <>
           <span>{esVideo ? <Film size={31} /> : <FileImage size={31} />}</span>
-          <strong>{esVideo ? "Arrastra tu video MP4" : "Arrastra la miniatura"}</strong>
-          <small>{esVideo ? "Maximo 100 MB" : "JPG o PNG, maximo 5 MB"}</small>
+          <strong>{esVideo ? "Arrastra tu video" : "Arrastra la miniatura"}</strong>
+          <small>{esVideo ? "Formatos de video comunes, maximo 100 MB" : "JPG o PNG, maximo 5 MB"}</small>
           <b>o selecciona un archivo</b>
         </>
       )}

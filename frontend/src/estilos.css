@@ -45,6 +45,9 @@ h1, h2, h3, .marca { font-family: "Space Grotesk", "DM Sans", sans-serif; }
 .navegacion button { align-items: center; background: none; border: 0; border-bottom: 3px solid transparent; color: #aaa; display: flex; gap: 8px; padding: 0 18px; }
 .navegacion button:hover, .navegacion .nav-activo { border-bottom-color: var(--coral); color: white; }
 .usuario-menu { align-items: center; display: flex; gap: 10px; justify-self: end; }
+.enlace-perfil { align-items: center; background: transparent; border: 0; color: inherit; display: flex; gap: 10px; min-width: 0; padding: 5px; }
+.enlace-perfil:hover .nombre-usuario, .enlace-perfil:focus-visible .nombre-usuario { color: var(--verde); }
+.enlace-perfil:focus-visible { outline: 2px solid var(--verde); outline-offset: 2px; }
 .avatar { align-items: center; background: #dce9e5; border-radius: 50%; color: #125747; display: inline-flex; flex: 0 0 auto; font-weight: 700; height: 36px; justify-content: center; width: 36px; }
 .avatar-pequeno { height: 32px; width: 32px; }
 .avatar-grande { font-size: 28px; height: 72px; width: 72px; }

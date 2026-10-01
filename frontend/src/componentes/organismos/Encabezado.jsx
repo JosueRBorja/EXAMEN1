@@ -25,8 +25,15 @@ export default function Encabezado({ pagina, usuario, alNavegar, alCerrarSesion 
       </nav>
 
       <div className="usuario-menu">
-        <Avatar usuario={usuario} />
-        <span className="nombre-usuario">{usuario.name}</span>
+        <button
+          className="enlace-perfil"
+          onClick={() => alNavegar("perfil")}
+          title="Abrir mi perfil"
+          aria-label={`Abrir perfil de ${usuario.name}`}
+        >
+          <Avatar usuario={usuario} />
+          <span className="nombre-usuario">{usuario.name}</span>
+        </button>
         <button className="boton-icono" onClick={alCerrarSesion} title="Cerrar sesion" aria-label="Cerrar sesion">
           <LogOut size={19} />
         </button>
